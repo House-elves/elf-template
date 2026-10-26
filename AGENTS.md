@@ -36,6 +36,7 @@ Config.java     reads ~/.config/<name>/config
 Claude.java     Claude, locked down, for elves that ask it to write or sum something up
 ui/my-elf.js    its tab and its dashboard card
 README.md       what it does, for the + page's link and for people reading the repo
+CHANGES.md      what's new in each version, in plain words: the desk shows it when it offers the update
 AGENTS.md       this guide, kept in every elf so later changes follow it too
 ```
 
@@ -290,6 +291,11 @@ Never test an action that sends, posts or deletes against a real account. Make i
 
 - **One commit per change:** squash before you push, with a message that says what changed for the person using it
   ("Done marks a whole topic read"). Raise `version`.
+- **Say what's new in CHANGES.md:** each version you publish gets a section at the top, headed by its version
+  (`## 1.3.0`), with a line or two per change, for someone who uses the elf and never reads its code: "New: Done marks
+  a whole topic read", "Fixed: the card no longer counts items you've read". When the desk offers the update, it shows
+  the sections newer than the version you have, above the code. A change nobody would notice still raises `version`;
+  its section can say "Behind the scenes: …".
 - **Tag the repo `house-elf`**, so the **+** page lists it.
 - **A public elf carries nothing private:** no tokens or keys, no email addresses or hosts but public ones, nothing
   from your employer or your customers, and no real names in examples. `--check-elf` catches some of this; read the
