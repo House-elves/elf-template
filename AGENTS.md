@@ -203,7 +203,11 @@ The runner checks `untrusted` for prompt injection first, then runs Claude Code 
 item. That's a PR or an issue (`kind: PR | ISSUE` with its number), or a repo's default branch (`kind: REPO`,
 `number: 0`). `readOnly: true` gives the agent only Read, Grep and Glob in that clone. `web: true` (with `readOnly`,
 on a public repo, with no `untrusted` text and no `session`) lets it search and read the web too, in a fresh clone of
-its own; it can't fetch this machine or its local network, and the runner's safety check reads its whole prompt. Its report is in
+its own; it can't fetch this machine or its local network, and the runner's safety check reads its whole prompt.
+`images` (runner 0.42.0 and later, which tells an action its version in `ELF_RUNNER_VERSION`) shows the agent up to 4
+images with its prompt, such as screenshots you pasted: `[{"type": "image/png", "data": "<base64>"}]`, each a PNG,
+JPEG, GIF or WebP of at most 3.75 MB, which the safety check reads too. Not with `web`. The desk takes at most 64 KB
+at a time from a tab, so a tab sends an image to its elf in parts; Elf Maker's `attach` action is the example. Its report is in
 `agents/<id>.json`, and the tab reads it with `elf.agent(id)`. `zulip-digest`'s `Research.java` is the example to
 copy. An agent's commits stay in the runner's worktree until the elf asks for a push on your click; that's in
 `github`, which is the only elf that pushes.
