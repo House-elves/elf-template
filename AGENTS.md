@@ -58,7 +58,8 @@ Anything it doesn't accept, the elf doesn't install. Check it with `--check-elf`
 | `description` | One sentence, up to 300 characters: what it does for you, as the **+** page shows it. |
 | `main` | The `.java` file at the repo's root that jbang runs. |
 | `config` | Always `~/.config/<name>/config`. |
-| `tools` | The programs it runs, like `[gh, claude]`. `house-elves doctor` checks for them. |
+| `tools` | The programs it runs, like `[gh]`. `house-elves doctor` checks for them. A coding agent it asks goes in `ai`, not here. |
+| `ai` | `[ask]` when it asks a coding agent (`Claude.ask`): its settings then let you choose which. |
 | `reads`, `writes` | Plain sentences, shown before you install it. Name every place outside this machine it reads or writes, and say when it waits for your click. An elf that writes nothing outside the machine says so: "Nothing outside this machine." |
 | `settings` | What the desk asks for. See Settings. |
 | `commands` | What runs in the background: its refresh, its dry run. See Commands. |
@@ -177,11 +178,16 @@ feeds, a board. Leave it out when a run costs real money or time and is only wan
   never written down. For anything else, use a `secret` setting.
 - **Exit codes:** 0 when it worked; anything else marks the run failed.
 
-### Claude
+### Asking a coding agent
 
-Use `Claude.ask(prompt, minutes)`. It runs `claude -p` with no tools (built in or MCP), none of your settings, and an
-empty folder of its own, so it can only answer with text. Whatever an elf gives Claude is likely to include other
-people's words, like an email, a chat or a feed. So:
+Use `Claude.ask(prompt, minutes)`, and say `ai: [ask]` in `elf.yaml`. Run by the runner, it asks the coding agent
+chosen in the elf's settings (Claude Code, Codex or pi; the runner's choice by default) through `ELF_ASK`, which the
+runner gives every elf it starts. `ELF_ASK` reads the prompt on stdin, takes `--schema JSON` (answer in that shape),
+`--system TEXT` and `--minutes N`, and prints its answer as `claude -p --output-format json` does: `result`,
+`structured_output`, `total_cost_usd` when the agent says, and `is_error`. Each agent runs with no tools (built in, MCP
+or plugins), none of your settings or instruction files, and an empty folder of its own, so it can only answer with
+text. Run by hand, `Claude.ask` runs `claude -p` locked down the same way. Whatever an elf gives the agent is likely
+to include other people's words, like an email, a chat or a feed. So:
 
 - Put that text in the prompt as data: JSON in a tag (`<items>…</items>`), with `</` written as `<\/`. Never paste
   it into the instructions.

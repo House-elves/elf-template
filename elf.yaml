@@ -6,7 +6,9 @@ author: "@your-login"
 description: Reads a news feed and lists what's new since you last looked, for its tab.
 main: MyElf.java
 config: ~/.config/my-elf/config
-tools: [claude]
+tools: []
+# It asks a coding agent (Claude.ask): Claude Code unless you choose another in its settings.
+ai: [ask]
 
 # What it reads and writes, in plain words: the desk shows these before you install it, so they must be true and
 # complete. Name every place outside this machine it reaches, and say when it waits for your click.
