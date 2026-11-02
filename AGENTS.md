@@ -210,6 +210,9 @@ item. That's a PR or an issue (`kind: PR | ISSUE` with its number), or a repo's 
 `number: 0`). `readOnly: true` gives the agent only Read, Grep and Glob in that clone. `web: true` (with `readOnly`,
 on a public repo, with no `untrusted` text and no `session`) lets it search and read the web too, in a fresh clone of
 its own; it can't fetch this machine or its local network, and the runner's safety check reads its whole prompt.
+With runner 0.45.0 and later, `kind: WEB` (no `repo`, `number: 0`, and only with `web` and `readOnly`) gives such an
+agent no repo at all, an empty folder of its own: for checking a site or looking something up, for steps you saw and
+approved. Never put anyone else's words in its prompt: only what you approved on your screen.
 `images` (runner 0.42.0 and later, which tells an action its version in `ELF_RUNNER_VERSION`) shows the agent up to 4
 images with its prompt, such as screenshots you pasted: `[{"type": "image/png", "data": "<base64>"}]`, each a PNG,
 JPEG, GIF or WebP of at most 3.75 MB, which the safety check reads too. Not with `web`. The desk takes at most 64 KB
