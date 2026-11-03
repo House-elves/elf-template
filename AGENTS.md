@@ -216,6 +216,12 @@ approved. Never put anyone else's words in its prompt. Text you approved on your
 someone's words (steps drawn from an email, say) goes in `approved` (runner 0.45.2 and later, only with `web`): the
 runner adds it to the prompt in `<approved>` itself, and screens it as someone's words as well as the task as a whole.
 The Mail elf's `DoSteps.java` is the example.
+For a session that goes on over many turns (runner 0.46.0 and later, Sessions is the example): `slot` in a REPO
+checkout (`[a-z0-9-]`, up to 40) gives the agent a clone of the repo of its own, kept between agents with the same
+slot, so each turn finds the last one's work; the runner names it after your elf, so you only ever reach your own. No
+`schema` (or an empty one) has it answer in plain text, its last message, as `output.reply`. `goal` is given to it
+again in the system prompt each turn, so it outlives compaction. Pass the last answer's `session` to resume it. The
+tab removes a slot it's done with with `elf.removeSlot(repo, slot)`, refused while one of its agents works there.
 `images` (runner 0.42.0 and later, which tells an action its version in `ELF_RUNNER_VERSION`) shows the agent up to 4
 images with its prompt, such as screenshots you pasted: `[{"type": "image/png", "data": "<base64>"}]`, each a PNG,
 JPEG, GIF or WebP of at most 3.75 MB, which the safety check reads too. Not with `web`. The desk takes at most 64 KB
@@ -247,7 +253,7 @@ What `elf` gives the page:
 - **Commands and actions:** `elf.run(command, params)` starts a command, and `elf.state()` says what's running and what
   failed. `elf.act(action, params)` asks for an action; it rejects with `cancelled` when you said no.
 - **Updates:** `elf.onChange(cb)` calls back when a run starts or ends, or a data folder changed.
-- **Agents:** `elf.agent(id)` and `elf.cancelAgent(id)`.
+- **Agents:** `elf.agent(id)`, `elf.cancelAgent(id)` and `elf.removeSlot(repo, slot)`.
 - **Settings:** `elf.settings(keys, heading)` opens the desk's settings for it, and `elf.values()` gives their values,
   without secrets.
 - **Navigation:** `elf.route()`, `elf.go(route)` and `elf.onRoute(cb)` for places in the tab that Back and links
