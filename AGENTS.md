@@ -228,6 +228,11 @@ From runner 0.52.0 an action may push a slot's commits, on your confirm: `{"push
 "headRepo", "headRef", "from", "to", "token"}}` (with `"squash": true, "base"` to replace what it pushed before); the
 runner pushes from that slot's clone with the token, and answers `push: {status, error}` without it. Sessions'
 `push` action is the example.
+From runner 0.53.0 such a session may also be given variables, `"env": {"NAME": "value"}` (up to 30, one line each,
+not the sandbox's own like `PATH`, `HOME`, `GIT_*` or `CLAUDE_*`), for the commands its agent runs: they're in a file
+only you can read, which Claude Code sources before each shell command and `SESSION_ENV_FILE` names for another agent
+to source. The agent itself never runs with them (so `ANTHROPIC_API_KEY` is for what it builds), and the runner never
+logs or keeps them. Tell the agent their names in the prompt; Sessions' settings are the example.
 `images` (runner 0.42.0 and later, which tells an action its version in `ELF_RUNNER_VERSION`) shows the agent up to 4
 images with its prompt, such as screenshots you pasted: `[{"type": "image/png", "data": "<base64>"}]`, each a PNG,
 JPEG, GIF or WebP of at most 3.75 MB, which the safety check reads too. From runner 0.50.0 one may be a PDF
