@@ -232,6 +232,9 @@ at a time from a tab, so a tab sends an image to its elf in parts; Elf Maker's `
 `agents/<id>.json`, and the tab reads it with `elf.agent(id)`. `zulip-digest`'s `Research.java` is the example to
 copy. An agent's commits stay in the runner's worktree until the elf asks for a push on your click; that's in
 `github`, which is the only elf that pushes.
+When an agent ends, `agents: {done: <action>}` in `elf.yaml` has the runner call that action with `{"id": "…"}`; from
+runner 0.51.0 it may answer with the next `agent` to start, as any action may (Sessions sends a message you queued
+while the last turn worked that way).
 
 ## Its tab
 
