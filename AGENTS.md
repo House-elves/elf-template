@@ -224,6 +224,10 @@ again in the system prompt each turn, so it outlives compaction. `agent: "bob"` 
 such a session) has IBM Bob work on it instead of Claude Code; a session keeps its agent, since neither can resume the
 other's. Pass the last answer's `session` to resume it. The
 tab removes a slot it's done with with `elf.removeSlot(repo, slot)`, refused while one of its agents works there.
+From runner 0.52.0 an action may push a slot's commits, on your confirm: `{"push": {"repo", "number": 0, "slot",
+"headRepo", "headRef", "from", "to", "token"}}` (with `"squash": true, "base"` to replace what it pushed before); the
+runner pushes from that slot's clone with the token, and answers `push: {status, error}` without it. Sessions'
+`push` action is the example.
 `images` (runner 0.42.0 and later, which tells an action its version in `ELF_RUNNER_VERSION`) shows the agent up to 4
 images with its prompt, such as screenshots you pasted: `[{"type": "image/png", "data": "<base64>"}]`, each a PNG,
 JPEG, GIF or WebP of at most 3.75 MB, which the safety check reads too. From runner 0.50.0 one may be a PDF
