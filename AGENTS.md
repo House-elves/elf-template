@@ -277,6 +277,8 @@ What `elf` gives the page:
 - **Voice** (desk 0.6.41 and later, its tab only): `elf.listen(onText)` has the desk listen, with the browser's speech
   recognition or Whisper on the desk's machine (you choose on its listening bar), and calls `onText({final, interim,
   error, done})` as you speak; it answers `{stop()}`. Put `final` words where you're writing; show `interim` only.
+  Or put `<elf-mic></elf-mic>` right after a text box (desk 0.6.42 and later): a 🎤 that puts what you say in at its
+  cursor. Give it `.target` when the box isn't just before it.
 - **Memory:** `elf.store.get/set` keeps small things in this browser, like an unsent edit.
 
 The pieces most tabs have:
