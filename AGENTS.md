@@ -274,6 +274,9 @@ What `elf` gives the page:
   without secrets.
 - **Navigation:** `elf.route()`, `elf.go(route)` and `elf.onRoute(cb)` for places in the tab that Back and links
   reach. `elf.open()` goes to its tab, and `elf.openElf(name)` to another elf's.
+- **Voice** (desk 0.6.41 and later, its tab only): `elf.listen(onText)` has the desk listen, with the browser's speech
+  recognition or Whisper on the desk's machine (you choose on its listening bar), and calls `onText({final, interim,
+  error, done})` as you speak; it answers `{stop()}`. Put `final` words where you're writing; show `interim` only.
 - **Memory:** `elf.store.get/set` keeps small things in this browser, like an unsent edit.
 
 The pieces most tabs have:
