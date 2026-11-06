@@ -223,7 +223,7 @@ slot, so each turn finds the last one's work; the runner names it after your elf
 again in the system prompt each turn, so it outlives compaction. `agent: "bob"` (runner 0.47.0 and later, only for
 such a session) has IBM Bob work on it instead of Claude Code; a session keeps its agent, since neither can resume the
 other's. Pass the last answer's `session` to resume it. The
-tab removes a slot it's done with with `elf.removeSlot(repo, slot)`, refused while one of its agents works there.
+tab removes a slot it's done with with `elf.removeSlot(repo, slot)`, refused while one of its agents works there. `elf.download(repo, slot, path)` downloads a file from one of its slots (a video the agent made), on a click only: the path is the file's place in the clone, or its full path there. Your browser saves it (up to 200 MB). Needs desk 0.6.42 and runner 0.54.0.
 From runner 0.52.0 an action may push a slot's commits, on your confirm: `{"push": {"repo", "number": 0, "slot",
 "headRepo", "headRef", "from", "to", "token"}}` (with `"squash": true, "base"` to replace what it pushed before); the
 runner pushes from that slot's clone with the token, and answers `push: {status, error}` without it. Sessions'
